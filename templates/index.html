@@ -5,18 +5,36 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Search and Rescue Image Analysis</h1>
-    <p>Upload an image for human detection.</p>
 
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
+<label class="switch">
+<input type="checkbox" id="dark-mode-toggle">
+<span class="slider round"></span>
+</label>
+    <header>
+        <h1>Search and Rescue</h1>
+        <p>Upload an image to detect people.</p>
+    </header>
 
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
+    <main>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="file-upload" accept="image/*">
+            <label for="file-upload" class="upload-button">Choose Image</label> <br>
+            <div id="image-preview-container" style="display: none;">  </div>
+            <progress id="progress-bar" value="0" max="100"></progress><br>
 
+            <input type="submit" value="Analyze">
+        </form>
 
+    </main>
+
+    <footer>
+        © 2024 Search and Rescue
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='dark.js') }}"></script>
 </body>
 </html>

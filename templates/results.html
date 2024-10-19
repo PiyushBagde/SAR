@@ -5,19 +5,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Search and Rescue Results</h1>
+<label class="switch">
+<input type="checkbox" id="dark-mode-toggle">
+<span class="slider round"></span>
+</label>
+    <header>
+        <h1>Results</h1>
+    </header>
 
-    <div class="image-container">
-        <div class="image-wrapper">  <!-- Wrapper for original image -->
-            <img src="{{ url_for('uploaded_file', filename=original_image_name) }}" alt="Original Image">
+    <main>
+        <div class="image-container">
+            <div class="image-wrapper">
+                <img src="{{ url_for('uploaded_file', filename=original_image_name) }}" alt="Original Image">
+            </div>
+            <div class="vertical-line"></div>
+            <div class="image-wrapper">
+                <img src="{{ url_for('uploaded_file', filename=annotated_image_name) }}" alt="Annotated Image">
+            </div>
         </div>
-        <div class="vertical-line"></div>
-        <div class="image-wrapper">  <!-- Wrapper for annotated image -->
-            <img src="{{ url_for('uploaded_file', filename=annotated_image_name) }}" alt="Annotated Image">
-        </div>
-    </div>
+    </main>
 
-    <a href="/">Upload Another Image</a> <button onclick="history.back()">Go Back</button>
 
+    <footer>
+        <button onclick="history.back()">Go Back</button>
+    </footer>
+
+     <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='dark.js') }}"></script>
 </body>
 </html>

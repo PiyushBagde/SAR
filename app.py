@@ -1,10 +1,14 @@
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for, jsonify
 from ultralytics import YOLO
 import os
+import uuid
+import time
 
 app = Flask(__name__)
-MODEL_PATH = 'model/model.pt'
-model = YOLO(MODEL_PATH)
+
+# Model and Upload Folder Setup
+MODEL_PATH = 'model/model.pt'  # Update with your model path
+model = YOLO(MODEL_PATH)  # Load the YOLO model
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -13,7 +17,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == "POST":
+    if request.method == 'POST':
         if 'file' not in request.files:
             return render_template('index.html', error="No file part")
 
@@ -22,18 +26,25 @@ def index():
             return render_template('index.html', error="No selected file")
 
         if file:
+            # Generate unique filenames
             filename = file.filename
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            extension = os.path.splitext(filename)[1]  # Get file extension
+            original_filename = str(uuid.uuid4()) + extension
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], original_filename)
             file.save(filepath)
 
-            results = model(filepath, conf=0.7)
+            # --- Perform YOLOv8 inference ---
+            results = model(filepath, conf=0.5)
 
-            annotated_filename = 'annotated_' + filename
+            # Save annotated image with unique filename
+            annotated_filename = "annotated_" + original_filename
             annotated_image_path = os.path.join(app.config['UPLOAD_FOLDER'], annotated_filename)
-            results[0].save(annotated_image_path)
+            results[0].save(annotated_image_path)  # Save the first annotated image
+            # -------------------------------
 
+            # Redirect to the results page
             return redirect(url_for('show_results',
-                                    original_image_name=filename,
+                                    original_image_name=original_filename,
                                     annotated_image_name=annotated_filename))
 
     return render_template('index.html')
