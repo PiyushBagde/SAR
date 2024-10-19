@@ -3,7 +3,6 @@
 <head>
     <title>Search and Rescue</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
     <h1>Search and Rescue Image Analysis</h1>
@@ -18,9 +17,6 @@
         <input type="submit" value="Upload">
     </form>
 
-    {% if image_path %}
-        <img src="{{ url_for('uploaded_file', filename=image_path.split('/')[-1] ) }}" alt="Annotated Image">
-    {% endif %}
 
 </body>
 </html>

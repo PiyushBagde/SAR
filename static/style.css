@@ -1,0 +1,56 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ... other styles ... */
+
+.image-container {
+    display: flex;
+    align-items: center; /* Vertically align the image wrappers */
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%; /* Take full width */
+    overflow: hidden;      /* Hide any overflow */
+}
+
+.image-wrapper {
+    width: 50%; /* Each image takes half the width */
+    overflow: hidden;  /* Hide overflow within each wrapper */
+    display: flex;
+    justify-content: center; /* Center image horizontally within wrapper */
+    align-items: center;      /* Center image vertically within wrapper */
+    height: auto;
+}
+
+
+
+.vertical-line {
+    border-left: 2px dashed #000000;
+    height: 100%; /* Make the line the same height as the images */
+    margin: 0 20px; /* Adjust spacing as needed */
+    align-self: stretch; /* Make vertical line stretch to match image height */
+
+}
+
+img {
+    max-width: 100%;  /* Image scales to fit within its wrapper */
+    max-height: 600px; /* Set a maximum height as needed */
+    height: auto;
+    display: block; /* Prevent small space below images */
+
+}

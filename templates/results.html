@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Search and Rescue Results</h1>
+
+    <div class="image-container">
+        <div class="image-wrapper">  <!-- Wrapper for original image -->
+            <img src="{{ url_for('uploaded_file', filename=original_image_name) }}" alt="Original Image">
+        </div>
+        <div class="vertical-line"></div>
+        <div class="image-wrapper">  <!-- Wrapper for annotated image -->
+            <img src="{{ url_for('uploaded_file', filename=annotated_image_name) }}" alt="Annotated Image">
+        </div>
+    </div>
+
+    <a href="/">Upload Another Image</a> <button onclick="history.back()">Go Back</button>
+
+</body>
+</html>
