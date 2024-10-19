@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search and Rescue</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Search and Rescue Image Analysis</h1>
+    <p>Upload an image for human detection.</p>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if image_path %}
+        <img src="{{ url_for('uploaded_file', filename=image_path.split('/')[-1] ) }}" alt="Annotated Image">
+    {% endif %}
+
+</body>
+</html>

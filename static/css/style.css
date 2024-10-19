@@ -1,0 +1,27 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;  /* Add some margin around the content */
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Dark gray */
+}
+
+p {
+    text-align: center;
+}
+
+form {
+    text-align: center;  /* Center the form */
+    margin-bottom: 20px; /* Space below the form */
+}
+
+img {
+    max-width: 100%; /* Make sure image doesn't overflow */
+    height: auto;      /* Maintain aspect ratio */
+    display: block;  /* Make the image a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    border: 1px solid #ddd; /* Add a subtle border */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* A little shadow */
+}
