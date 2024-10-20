@@ -5,36 +5,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<header>
+    <h1>Search and Rescue</h1>
+    <p>Upload an image or video to detect people.</p>
+    <label class="switch">
+        <input type="checkbox" id="dark-mode-toggle">
+        <span class="slider round"></span>
+    </label>
+</header>
 
-<label class="switch">
-<input type="checkbox" id="dark-mode-toggle">
-<span class="slider round"></span>
-</label>
-    <header>
-        <h1>Search and Rescue</h1>
-        <p>Upload an image to detect people.</p>
-    </header>
+<main>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
 
-    <main>
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" id="file-upload" accept="image/*">
-            <label for="file-upload" class="upload-button">Choose Image</label> <br>
-            <div id="image-preview-container" style="display: none;">  </div>
-            <progress id="progress-bar" value="0" max="100"></progress><br>
+    <form method="POST" enctype="multipart/form-data" id="upload-form">
+        <input type="file" name="file" id="file-upload" accept="image/*,video/*">
+        <label for="file-upload" class="upload-button">Choose File</label><br>
+        <div id="image-preview-container" style="display: none;"></div>
+        <div id="video-preview" style="display:none;"></div>
 
-            <input type="submit" value="Analyze">
-        </form>
+        <progress id="progress-bar" value="0" max="100" style="display: none;"></progress>
+        <input type="submit" value="Analyze">
+    </form>
 
-    </main>
+    <div id="loading-animation" style="display: none;"></div>
+    <div id="video-preview" style="display:none;"></div>
 
-    <footer>
-        © 2024 Search and Rescue
-    </footer>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-<script src="{{ url_for('static', filename='dark.js') }}"></script>
+</main>
+
+<footer>
+    © 2024 Search and Rescue
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='darkmode.js') }}"></script>
+
+
 </body>
 </html>

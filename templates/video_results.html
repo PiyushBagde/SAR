@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Results</h1>
+</header>
+<main>
+    <video id="processed-video" width="640" height="480" controls>
+        <source src="{{ url_for('download_video', filename=video_name) }}">
+    </video>
+    <br>
+
+    <a href="{{ url_for('download_video', filename=video_name) }}" download>Download Processed Video</a>
+</main>
+<footer>
+    <a href="/">Upload Another</a>
+    <button onclick="history.back()">Go Back</button>
+</footer>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='darkmode.js') }}"></script>
+</body>
+</html>
